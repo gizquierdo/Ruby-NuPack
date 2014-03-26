@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class MarkupMaterial - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>markup_material.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li ><a href="#method-i-initialize">#initialize</a>
+    
+    <li ><a href="#method-i-to_s">#to_s</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/created_rid.html">created.rid</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Estimate.html">Estimate</a>
+  
+    <li><a href="./EstimateManager.html">EstimateManager</a>
+  
+    <li><a href="./MarkupManager.html">MarkupManager</a>
+  
+    <li><a href="./MarkupMaterial.html">MarkupMaterial</a>
+  
+    <li><a href="./Markups.html">Markups</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class MarkupMaterial</h1>
+
+  <div id="description" class="description">
+    
+<p>This class will hold the hierarchy of material categories/markups</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-markup" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">markup</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-material_name" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">material_name</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-material_parent" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">material_parent</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-to_s" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_s</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Display the object in a friendly, meaningul way.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="to_s-source">
+            <pre><span class="ruby-comment"># File markup_material.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+        <span class="ruby-ivar">@material_name</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@markup</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;%&quot;</span> <span class="ruby-operator">+</span> (<span class="ruby-operator">!</span><span class="ruby-ivar">@material_parent</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span>  (<span class="ruby-string">&quot;, Parent: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">material_parent</span>) <span class="ruby-operator">:</span> <span class="ruby-string">&quot;&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- to_s-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- to_s-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Protected Instance Methods</h3>
+
+    
+      <div id="method-i-initialize" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">initialize</span><span
+            class="method-args">(markup, material_name, material_parent = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Initialize method for <a href="MarkupMaterial.html">MarkupMaterial</a></p>
+<ul><li>
+<p><strong>Params</strong>:</p>
+<ul><li><dl class="rdoc-list note-list"><dt><code>markup</code>
+<dd>
+<p><code>Numeric</code> markup of the total project cost for this material</p>
+</dd></dl>
+</li><li><dl class="rdoc-list note-list"><dt><code>material_name</code>
+<dd>
+<p><code>String</code> material name</p>
+</dd></dl>
+</li><li><dl class="rdoc-list note-list"><dt><code>material_parent</code>
+<dd>
+<p><code>String</code> Parent name of this material (may be nil)</p>
+</dd></dl>
+</li></ul>
+</li><li>
+<p><strong>Raises</strong> :</p>
+<ul><li><dl class="rdoc-list note-list"><dt><code>ArgumentError</code>
+<dd>
+<p>if any parameter is nil or negative</p>
+</dd></dl>
+</li></ul>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="initialize-source">
+            <pre><span class="ruby-comment"># File markup_material.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">markup</span>, <span class="ruby-identifier">material_name</span>, <span class="ruby-identifier">material_parent</span> = <span class="ruby-keyword">nil</span>) <span class="ruby-comment">#:notnew:</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>,<span class="ruby-node">&quot;Markup - Expecting a number from 0-100, you entered: #{markup.inspect}&quot;</span> <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">markup</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Numeric</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">markup</span> <span class="ruby-operator">&gt;=</span><span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">markup</span> <span class="ruby-operator">&lt;=</span><span class="ruby-value">100</span>)
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>,<span class="ruby-node">&quot;Material Name - Expecting an alphanumeric value: #{material_name.inspect}&quot;</span> <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">material_name</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>))
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>,<span class="ruby-node">&quot;Material Parent - Expecting an alphanumeric value: #{material_parent.inspect}&quot;</span> <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">material_parent</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">material_parent</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>))
+        
+        <span class="ruby-ivar">@markup</span> = <span class="ruby-identifier">markup</span>
+        <span class="ruby-ivar">@material_name</span> = <span class="ruby-identifier">material_name</span>
+        <span class="ruby-ivar">@material_parent</span> = <span class="ruby-identifier">material_parent</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- initialize-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- initialize-method -->
+
+    
+    </section><!-- protected-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.0.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

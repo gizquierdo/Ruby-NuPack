@@ -19,7 +19,7 @@ class TestEstimate < MiniTest::Unit::TestCase
 		assert_raises( ArgumentError ) { Estimate.new(100,1,'a') }
 		assert_raises( ArgumentError ) { Estimate.new() }
 		assert_raises( ArgumentError ) { Estimate.new(100) }
-		assert_raises( ArgumentError ) { Estimate.new(100,1,nil,nil,nil,nil) }
+		assert_raises( ArgumentError ) { Estimate.new(100,1,nil,nil,nil,nil,nil) }
 	end
 	
 	def test_verify_calculations	
