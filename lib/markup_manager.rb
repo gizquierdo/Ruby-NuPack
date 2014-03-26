@@ -32,9 +32,9 @@ class MarkupManager
 	#   - +ArgumentError+:: if any parameter is nil or negative
 	#
 	def apply_flat_markup_to(base_price)
-		retVal = 0
 		raise ArgumentError,"Base Price - Expecting a positive number: #{base_price.inspect}" unless (base_price.is_a?(Numeric) && base_price >= 0)
 		
+		retVal = 0
 		if !@flat_markup.nil? && @flat_markup.is_a?(Numeric)
 			retVal = (base_price * @flat_markup)/100.0
 		end
@@ -52,10 +52,10 @@ class MarkupManager
 	#   - +ArgumentError+:: if any parameter is nil or negative
 	#
 	def apply_labour_markup_to(price, quantity)
-		retVal = 0
 		raise ArgumentError,"Price - Expecting a positive number: #{price.inspect}" unless ((price.is_a?(Numeric)) && price >= 0)		
 		raise ArgumentError,"Quantity - Expecting a positive integer: #{quantity.inspect}" unless (quantity.is_a?(Integer) && quantity > 0)
-		
+			
+		retVal = 0
 		if !@labour_markup.nil? && @labour_markup.is_a?(Numeric)
 			retVal =  (price * (@labour_markup * quantity))/100.0
 		end
@@ -74,18 +74,15 @@ class MarkupManager
 	#
 	def apply_materials_markup_to(price,materials_array)
 		raise ArgumentError,"Price - Expecting a positive number: #{price.inspect}" unless (price.is_a?(Numeric) && price >= 0)
-		
 		raise ArgumentError,"Materials - Expecting an Array: #{materials_array.inspect}" unless (materials_array.is_a?(Array) || materials_array.nil?)
 		
 		materials_markups = Hash.new
-		if !materials_array.nil?
-			materials_array.each do |mat|
-				if (mat.is_a?(String) && !mat.nil?)
-					markup_cost = calculate_material_cost(price,mat)
-					materials_markups[mat] = (!markup_cost.nil?) ? markup_cost : 0
-				end
+		materials_array.each do |mat|
+			if (mat.is_a?(String) && !mat.nil?)
+				markup_cost = calculate_material_cost(price,mat)
+				materials_markups[mat] = (!markup_cost.nil?) ? markup_cost : 0
 			end
-		end
+		end		
 		return materials_markups
 	end
 	
@@ -99,13 +96,11 @@ class MarkupManager
 	#   - +ArgumentError+:: if any parameter is nil or negative
 	#
 	def calculate_material_cost(price,material)
-		retVal = 0
-		raise ArgumentError,"Price - Expecting a positive number: #{price.inspect}" unless (price.is_a?(Numeric) && price >= 0)
-		
+		raise ArgumentError,"Price - Expecting a positive number: #{price.inspect}" unless (price.is_a?(Numeric) && price >= 0)		
 		raise ArgumentError,"Material - Expecting a string: #{material.inspect}" unless (material.is_a?(String))
-	
-		m = material_markup_array.find {|s| s.material_name.upcase == material.upcase }
 		
+		retVal = 0
+		m = material_markup_array.find {|s| s.material_name.upcase == material.upcase }		
 		if !m.nil?
 			retVal =  (price * m.markup)/100.0
 		end
@@ -172,7 +167,7 @@ class MarkupManager
 	#Singleton behaviour:
 	@@instance = MarkupManager.new #The singleton object
 	
-	# Just returns the instance to itself.
+	# Just returns the singleton instance to itself.
 	def self.instance
 		return @@instance
 	end
