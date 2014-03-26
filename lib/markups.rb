@@ -1,5 +1,5 @@
 module Markups
-	@@flat_markup = 5
+	@@flat_markup = 5.0
 	@@labour_markup = 1.2
 	
 	@@materials_markup = Hash.new

@@ -30,24 +30,24 @@ class TestEstimate < MiniTest::Unit::TestCase
 		assert_equal(1,est.labour_quantity)
 		assert_equal(1.26,est.labour_charged)
 		hash = Hash.new
-		hash["Pharmaceuticals"] = 7.88
+		hash["Pharmaceuticals"] = 7.875
 		hash["Food"] = 13.65
 		hash["Paper"] = 0
 		assert_equal(hash,est.materials_charged_hash)
-		total = 100 + 5 + 1.26 + 13.65 + 7.88
-		assert_equal(total,est.total_price)
+		total = 100 + 5 + 1.26 + 13.65 + 7.875
+		assert_equal(total.round(2),est.get_final_price)
 		assert_equal(date,est.date_estimate_given)
 		assert_equal("test_employee",est.employee_ID)
 	end	
 	
 	def test_verify_sample_calculations		
 		est = Estimate.new(1299.99,3,["food"])
-		assert_equal(1591.58,est.total_price)
+		assert_equal(1591.58,est.get_final_price)
 		
 		est = Estimate.new(5432,1,["drugs"])
-		assert_equal(6199.81,est.total_price)
+		assert_equal(6199.81,est.get_final_price)
 		
 		est = Estimate.new(12456.95,4,["books"])
-		assert_equal(13707.63,est.total_price)
+		assert_equal(13707.63,est.get_final_price)
 	end
 end

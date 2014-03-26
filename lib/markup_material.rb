@@ -1,13 +1,12 @@
-require_relative 'markup_base'
-
-class MarkupMaterial < MarkupBase
-	attr_reader :material_name, :material_parent
+class MarkupMaterial 
+	attr_reader :markup, :material_name, :material_parent
 	#constuctor
 	def initialize(markup, material_name, material_parent = nil)
+		raise ArgumentError,"Markup - Expecting a number from 0-100, you entered: #{markup.inspect}" unless (markup.is_a?(Numeric) && markup >=0 && markup <=100)
 		raise ArgumentError,"Material Name - Expecting an alphanumeric value: #{material_name.inspect}" unless (material_name.is_a?(String))
 		raise ArgumentError,"Material Parent - Expecting an alphanumeric value: #{material_parent.inspect}" unless (material_parent.nil? || material_parent.is_a?(String))
 		
-		super(markup)
+		@markup = markup
 		@material_name = material_name
 		@material_parent = material_parent
 	end
