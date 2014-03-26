@@ -1,5 +1,3 @@
-require_relative 'markup_base'
-require_relative 'markup_labour'
 require_relative 'markup_material'
 require_relative 'markup_manager'
 
