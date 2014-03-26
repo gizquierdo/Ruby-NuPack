@@ -2,7 +2,7 @@ require_relative '../lib/estimate'
 require 'minitest/autorun'
 
 class TestEstimate < MiniTest::Unit::TestCase 
-	def test_estimate_can_be_created
+	def test_estimate_can_be_instantiated
 		assert_instance_of(Estimate,Estimate.new(100,1))
 		assert_instance_of(Estimate,Estimate.new(100,1,["Paper","Food"],Time.now,"test_employee"))
 		assert_instance_of(Estimate,Estimate.new(100,1,["Paper","Food"],nil,"test_employee"))

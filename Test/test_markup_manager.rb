@@ -2,7 +2,7 @@ require_relative '../lib/markup_manager'
 require 'minitest/autorun'
 
 class TestMarkupManager < MiniTest::Unit::TestCase 	
-	def test_markup_manager_cannot_init
+	def test_markup_manager_cannot_instantiate
 		assert_raises( NoMethodError ) { MarkupManager.new() }
 	end
 	
@@ -23,7 +23,6 @@ class TestMarkupManager < MiniTest::Unit::TestCase
 		
 		assert_raises( ArgumentError ) { MarkupManager.instance.apply_materials_markup('a',["Paper"])}
 		assert_raises( ArgumentError ) { MarkupManager.instance.apply_materials_markup(-1,["Paper"])}
-		assert_raises( ArgumentError ) { MarkupManager.instance.apply_materials_markup(1,nil)}
 		assert_raises( ArgumentError ) { MarkupManager.instance.apply_materials_markup(1)}
 		
 		assert_raises( ArgumentError ) { MarkupManager.instance.calculate_material_cost("Food",-1)}
@@ -52,7 +51,7 @@ class TestMarkupManager < MiniTest::Unit::TestCase
 	end
 	
 	def test_markup_manager_singleton
-		arrMat = ["Pharmaceuticals", "Food", "Electronics"]
+		arrMat = ["Food", "drugs","Pharmaceuticals", "Electronics"]
 		assert_equal(arrMat, MarkupManager.instance.get_possible_materials)
 	
 		assert_equal(5, MarkupManager.instance.apply_flat_markup(100))
