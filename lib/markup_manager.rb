@@ -2,24 +2,12 @@ require_relative 'markup_material'
 require_relative 'markups' #contains the static data for the singleton
 # Implements the singleton pattern
 class MarkupManager
-	attr_reader :flat_markup, :labour_markup, :material_markup_array
+	attr_reader :flat_markup, :labour_markup, :material_markup_hash
 	
 	def initialize() #:notnew:
 		init_flat_markup
 		init_labour_markup
 		init_materials
-	end
-	
-	# Returns an array of all the materials available
-	# This method would be handy for passing to any observer than needs
-	# to enumerate the options for tagging projects/providing estimates
-	# * *Raises* :
-	#   - +RuntimeError+:: if any material_markup_array is nil or negative
-	#
-	def get_possible_materials
-		raise "The array is nil! Try initializing the singleton." unless (!material_markup_array.nil?)
-		
-		@material_markup_array.map{|m| m.material_name}
 	end
 	
 	# Given the base price, the method applies the flat markup and returns
@@ -72,7 +60,7 @@ class MarkupManager
 	# * *Raises* :
 	#   - +ArgumentError+:: if any parameter is nil or negative
 	#
-	def apply_materials_markup_to(price,materials_array)
+	def apply_materials_markup_to(price,materials_array)	
 		raise ArgumentError,"Price - Expecting a positive number: #{price.inspect}" unless (price.is_a?(Numeric) && price >= 0)
 		raise ArgumentError,"Materials - Expecting an Array: #{materials_array.inspect}" unless (materials_array.is_a?(Array) || materials_array.nil?)
 		
@@ -89,27 +77,49 @@ class MarkupManager
 	# Given a price, and a specific material, apply the markup and return the price
 	#
 	# * *Params* :
-	#   - +price+ -> +Numeric+, price to apply the markup to
+	#   - +price+:: +Numeric+, price to apply the markup to
+	#   - +material+:: +String+, price to apply the markup to
 	# * *Returns* :
-	#   - +retVal+ -> +Numeric+, price that price * markup /100
+	#   - +retVal+:: +Numeric+ = price * markup /100. Will be 0 if material doesn't exist
 	# * *Raises* :
 	#   - +ArgumentError+:: if any parameter is nil or negative
 	#
-	def calculate_material_cost(price,material)
+	def calculate_material_cost(price,mat_name)
 		raise ArgumentError,"Price - Expecting a positive number: #{price.inspect}" unless (price.is_a?(Numeric) && price >= 0)		
-		raise ArgumentError,"Material - Expecting a string: #{material.inspect}" unless (material.is_a?(String))
-		
+		raise ArgumentError,"Material - Expecting a string: #{mat_name.inspect}" unless (mat_name.is_a?(String))
+
 		retVal = 0
-		m = material_markup_array.find {|s| s.material_name.upcase == material.upcase }		
-		if !m.nil?
-			retVal =  (price * m.markup)/100.0
+		if MarkupManager.material?(mat_name,@material_markup_hash)
+			retVal = (price * @material_markup_hash[mat_name.upcase].markup)/100.0
 		end
-		
+
 		return retVal
 	end
 	
+	# Checks the hash of materials comparing the names (uppercase) to
+	# find whether it already exists or not
+	# * *Params* :
+	#   - +material+:: +String+, material name to look for.
+	#   - +material_hash+:: +Hash+ place to look in
+	# * *Returns* :
+	#   - bool which tells us if the material is present or not.
+	# * *Raises* :
+	#   - +ArgumentError+:: if material is nil or not a string
+	#
+	def self.material?(material,material_hash)
+		raise ArgumentError,"Material - Expecting a string: #{material.inspect}" unless (material.is_a?(String))
+		raise ArgumentError,"material_hash - Expecting a hash: #{material_hash.inspect}" unless (material_hash.is_a?(Hash))
+		
+		material_hash.each_pair do |k, v| 
+			if k.upcase == material.upcase
+				return true
+			end
+		end
+		return false
+	end
+	
 	def to_s
-		return "Flat markkup: " + @flat_markup.to_s + " Labour markup: " + @labour_markup.to_s + " Materials: " + @material_markup_array.to_s
+		return "Flat markkup: " + @flat_markup.to_s + " Labour markup: " + @labour_markup.to_s + " Materials: " + @material_markup_hash.to_s
 	end
 	
 	private
@@ -140,12 +150,12 @@ class MarkupManager
 		end
 	end
 	
-	# Read the static data into material_markup_array
+	# Read the static data into material_markup_hash
 	# * *Raises* :
 	#   - +ArgumentError+:: if the static data is nil or negative
 	#
 	def init_materials()
-		@material_markup_array = Array.new
+		@material_markup_hash = Hash.new
 		if !Markups.materials_markup.nil?
 			raise ArgumentError,"Materials Markup - Expecting a Hash: #{Markups.materials_markup.inspect}" unless (Markups.materials_markup.is_a?(Hash))
 			
@@ -155,12 +165,25 @@ class MarkupManager
 					markup = v[0]
 					if v[1].is_a?(Array)
 						v[1].each do |mat|
-							@material_markup_array << MarkupMaterial.new(markup,mat, k)
+							add_material_to_hash(markup, mat, k,true) #override everytime
 						end
 					end
 				end
-				@material_markup_array << MarkupMaterial.new(markup,k,nil)
+				add_material_to_hash(markup,k,nil,true)
 			end
+		end
+	end
+	
+	def add_material_to_hash(material_markup,material,material_parent,override=nil)
+		raise ArgumentError,"Material - Expecting a string: #{material.inspect}" unless (material.is_a?(String))
+		
+		if MarkupManager.material?(material,@material_markup_hash)
+			if override
+				@material_markup_hash[material.upcase].markup = material_markup
+				@material_markup_hash[material.upcase].material_parent = material_parent
+			end
+		else
+			@material_markup_hash[material.upcase] = MarkupMaterial.new(material_markup,material, material_parent)
 		end
 	end
 	

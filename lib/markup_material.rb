@@ -1,6 +1,30 @@
 # This class will hold the hierarchy of material categories/markups
 class MarkupMaterial 
-	attr_reader :markup, :material_name, :material_parent
+	attr_reader :material_name,:markup, :material_parent
+	
+	# Setter method for markup
+	# * *Params*:
+	#   - +value+:: +Numeric+ markup of the total project cost for this material 
+	# * *Raises* :
+	#   - +ArgumentError+:: if value is nil or negative
+	#
+	def markup=(value)
+		raise ArgumentError,"Markup - Expecting a number from 0-100, you entered: #{value.inspect}" unless (value.is_a?(Numeric) && value >=0 && value <=100)
+		
+		@markup = value
+	end
+	
+	# Setter method for material_parent
+	# * *Params*:
+	#   - +value+:: +String+ Parent name of this material
+	# * *Raises* :
+	#   - +ArgumentError+:: if value is nil or negative
+	#
+	def material_parent=(value)
+		raise ArgumentError,"Material Parent - Expecting an alphanumeric value: #{value.inspect}" unless (value.is_a?(String))
+		
+		@material_parent = value
+	end
 	
 	# Initialize method for MarkupMaterial
 	# * *Params*:

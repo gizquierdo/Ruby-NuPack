@@ -1,8 +1,7 @@
 require_relative 'estimate'
 
-	# This is an interface class for Estimate
+# This is an interface class for Estimate
 class EstimateManager
-	@@currentEstimates = Array.new
 	
 	# Get only the final price given a variabl number of parameters
 	# * *Params*:
@@ -18,7 +17,6 @@ class EstimateManager
 	def self.get_new_estimate_final_price(base_price,labour_quantity, materials_array = nil, date_estimate_given = nil, employee_ID = nil, company = nil)
 		new_estimate = Estimate.new(base_price,labour_quantity, materials_array, date_estimate_given, employee_ID, company)		
 		raise "Something has gone wrong" unless !new_estimate.nil?		
-		@@currentEstimates << new_estimate
 		
 		return new_estimate.get_final_price
 	end
