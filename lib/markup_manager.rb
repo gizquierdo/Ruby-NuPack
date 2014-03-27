@@ -13,11 +13,11 @@ class MarkupManager
 	# Given the base price, the method applies the flat markup and returns
 	# the result
 	# * *Params*:
-	#   - +base_price+:: +Numeric+ 
+	#   - +base_price+:: +Numeric+ Base price
 	# * *Returns*:
-	#   - +retVal+:: +Numeric+ 
+	#   - +retVal+:: +Numeric+ Result of applyng the markup loaded
 	# * *Raises* :
-	#   - +ArgumentError+:: if any parameter is nil or negative
+	#   - +ArgumentError+:: if base_price is nil or negative
 	#
 	def apply_flat_markup_to(base_price)
 		raise ArgumentError,"Base Price - Expecting a positive number: #{base_price.inspect}" unless (base_price.is_a?(Numeric) && base_price >= 0)
@@ -32,10 +32,10 @@ class MarkupManager
 	
 	# Given a price, and how many workers are needed, the method applies the labour markup and returns the result
 	# * *Params*:
-	#   - +price+:: +Numeric+ 
-	#   - +quantity+:: +Integer+. Must be > 0 
+	#   - +price+:: +Numeric+ Base price (In this case it is base + flat markup)
+	#   - +quantity+:: +Integer+ Must be > 0 
 	# * *Returns*:
-	#   - +retVal+:: +Numeric+ 
+	#   - +retVal+:: +Numeric+ How much it costs to have _quantity_ workers
 	# * *Raises* :
 	#   - +ArgumentError+:: if any parameter is nil or negative
 	#
@@ -53,10 +53,10 @@ class MarkupManager
 	
 	# Given a price, and the tagged materials, the method applies the markup for each material
 	# * *Params*:
-	#   - +price+:: +Numeric+, price to apply the markup to
-	#   - +materials_array+:: +Array+. Materials we have tagged to the estimate
+	#   - +price+:: +Numeric+ 
+	#   - +materials_array+:: +Array+ Materials we have tagged to the estimate
 	# * *Returns*:
-	#   - +materials_markups+:: +Hash+
+	#   - +materials_markups+:: +Hash+ Per material, how much it costs
 	# * *Raises* :
 	#   - +ArgumentError+:: if any parameter is nil or negative
 	#
@@ -118,6 +118,7 @@ class MarkupManager
 		return false
 	end
 	
+	# Stringify this singleton!
 	def to_s
 		return "Flat markkup: " + @flat_markup.to_s + " Labour markup: " + @labour_markup.to_s + " Materials: " + @material_markup_hash.to_s
 	end
@@ -136,6 +137,7 @@ class MarkupManager
 			@flat_markup = 0
 		end		
 	end
+	
 	# Read the static data into labour_markup
 	# * *Raises* :
 	#   - +ArgumentError+:: if the static markup is nil or negative
@@ -174,8 +176,20 @@ class MarkupManager
 		end
 	end
 	
-	def add_material_to_hash(material_markup,material,material_parent,override=nil)
+	# Adds a material with the given markup and parent to the hash. 
+	# If material already is in, and override is true, then both markup and material parent are overwritten
+	# All keys are added in uppercase
+	# * *Params* :
+	#   - +material_markup+:: +Numeric+ Markup of the total project cost for this material 
+	#   - +material+:: +String+ Material name
+	#   - +material_parent+:: +String+ Parent name of this material (may be nil)
+	# * *Raises* :
+	#   - +ArgumentError+:: if any parameter is not valid
+	#
+	def add_material_to_hash(material_markup,material,material_parent = nil,override=nil)
+		raise ArgumentError,"Markup - Expecting a number from 0-100, you entered: #{material_markup.inspect}" unless (material_markup.is_a?(Numeric) && material_markup >=0 && material_markup <=100)
 		raise ArgumentError,"Material - Expecting a string: #{material.inspect}" unless (material.is_a?(String))
+		raise ArgumentError,"Material Parent - Expecting a string: #{material_parent.inspect}" unless (material_parent.is_a?(String) || material_parent.nil?)
 		
 		if MarkupManager.material?(material,@material_markup_hash)
 			if override

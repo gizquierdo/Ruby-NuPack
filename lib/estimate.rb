@@ -44,7 +44,7 @@ class Estimate
 	#   - +labour_quantity+:: +Integer+ How many people need to be involved
 	#   - +materials_array+:: +Array+ Materials tagged to the estimate(may be nil)
 	# * *Raises* :
-	#   - +ArgumentError+ -> if any parameter is nil or negative
+	#   - +ArgumentError+:: if any parameter is nil or negative
 	#
 	def initialize(base_price,labour_quantity, materials_array = nil) #:notnew:
 		raise ArgumentError,"Base Price - Expecting a positive number: #{base_price.inspect}" unless (base_price.is_a?(Numeric) && base_price >= 0)

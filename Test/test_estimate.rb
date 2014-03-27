@@ -36,7 +36,6 @@ class TestEstimate < MiniTest::Unit::TestCase
 		
 		estimate.add_material("Food") #I wonder what kind of product this test is making?
 		
-		puts estimate.materials_charged_hash
 		testHash = Hash.new
 		testHash["Wire"] = 0
 		testHash["drugs"] = 7.875

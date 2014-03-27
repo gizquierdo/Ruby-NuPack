@@ -143,7 +143,7 @@
         
         <div class="method-heading">
           <span class="method-name">get_new_estimate_final_price</span><span
-            class="method-args">(base_price,labour_quantity, materials_array = nil, date_estimate_given = nil, employee_ID = nil, company = nil)</span>
+            class="method-args">(base_price,labour_quantity, materials_array = nill)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -167,24 +167,13 @@
 <dd>
 <p><code>Array</code> Materials tagged to the estimate(may be nil)</p>
 </dd></dl>
-</li><li><dl class="rdoc-list note-list"><dt><code>date_estimate_given</code>
-<dd>
-<p><code>DateTime</code> Date when the estimate was given(may be nil)</p>
-</dd></dl>
-</li><li><dl class="rdoc-list note-list"><dt><code>employee_ID</code>
-<dd>
-<p><code>String</code> Employee who created the estimate(may be nil) - It will
-default to &#39;Auto&#39;</p>
-</dd></dl>
-</li><li><dl class="rdoc-list note-list"><dt><code>company</code>
-<dd>
-<p><code>String</code> Company the estimate is for</p>
-</dd></dl>
 </li></ul>
 </li><li>
 <p><strong>Raises</strong> :</p>
-<ul><li>
-<p><code>ArgumentError</code> -&gt; if any parameter is nil or negative</p>
+<ul><li><dl class="rdoc-list note-list"><dt><code>ArgumentError</code>
+<dd>
+<p>if any parameter is nil or negative</p>
+</dd></dl>
 </li></ul>
 </li></ul>
           
@@ -192,11 +181,10 @@ default to &#39;Auto&#39;</p>
 
           
           <div class="method-source-code" id="get_new_estimate_final_price-source">
-            <pre><span class="ruby-comment"># File estimate_manager.rb, line 18</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_new_estimate_final_price</span>(<span class="ruby-identifier">base_price</span>,<span class="ruby-identifier">labour_quantity</span>, <span class="ruby-identifier">materials_array</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">date_estimate_given</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">employee_ID</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">company</span> = <span class="ruby-keyword">nil</span>)
-        <span class="ruby-identifier">new_estimate</span> = <span class="ruby-constant">Estimate</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">base_price</span>,<span class="ruby-identifier">labour_quantity</span>, <span class="ruby-identifier">materials_array</span>, <span class="ruby-identifier">date_estimate_given</span>, <span class="ruby-identifier">employee_ID</span>, <span class="ruby-identifier">company</span>)           
+            <pre><span class="ruby-comment"># File estimate_manager.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_new_estimate_final_price</span>(<span class="ruby-identifier">base_price</span>,<span class="ruby-identifier">labour_quantity</span>, <span class="ruby-identifier">materials_array</span> = <span class="ruby-identifier">nill</span>)
+        <span class="ruby-identifier">new_estimate</span> = <span class="ruby-constant">Estimate</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">base_price</span>,<span class="ruby-identifier">labour_quantity</span>, <span class="ruby-identifier">materials_array</span>)
         <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Something has gone wrong&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-operator">!</span><span class="ruby-identifier">new_estimate</span>.<span class="ruby-identifier">nil?</span>            
-        <span class="ruby-identifier">@@currentEstimates</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">new_estimate</span>
         
         <span class="ruby-keyword">return</span> <span class="ruby-identifier">new_estimate</span>.<span class="ruby-identifier">get_final_price</span>
 <span class="ruby-keyword">end</span></pre>

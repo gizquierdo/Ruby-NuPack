@@ -75,6 +75,10 @@
     
     <li ><a href="#method-i-initialize">#initialize</a>
     
+    <li ><a href="#method-i-markup-3D">#markup=</a>
+    
+    <li ><a href="#method-i-material_parent-3D">#material_parent=</a>
+    
     <li ><a href="#method-i-to_s">#to_s</a>
     
   </ul>
@@ -187,6 +191,107 @@
       <h3 class="section-header">Public Instance Methods</h3>
 
     
+      <div id="method-i-markup-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">markup=</span><span
+            class="method-args">(value)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Setter method for markup</p>
+<ul><li>
+<p><strong>Params</strong>:</p>
+<ul><li><dl class="rdoc-list note-list"><dt><code>value</code>
+<dd>
+<p><code>Numeric</code> markup of the total project cost for this material</p>
+</dd></dl>
+</li></ul>
+</li><li>
+<p><strong>Raises</strong> :</p>
+<ul><li><dl class="rdoc-list note-list"><dt><code>ArgumentError</code>
+<dd>
+<p>if value is nil or negative</p>
+</dd></dl>
+</li></ul>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="markup-3D-source">
+            <pre><span class="ruby-comment"># File markup_material.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">markup=</span>(<span class="ruby-identifier">value</span>)
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>,<span class="ruby-node">&quot;Markup - Expecting a number from 0-100, you entered: #{value.inspect}&quot;</span> <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Numeric</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">&gt;=</span><span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">&lt;=</span><span class="ruby-value">100</span>)
+        
+        <span class="ruby-ivar">@markup</span> = <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- markup-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- markup-3D-method -->
+
+    
+      <div id="method-i-material_parent-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">material_parent=</span><span
+            class="method-args">(value)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Setter method for <a
+href="MarkupMaterial.html#attribute-i-material_parent">#material_parent</a></p>
+<ul><li>
+<p><strong>Params</strong>:</p>
+<ul><li><dl class="rdoc-list note-list"><dt><code>value</code>
+<dd>
+<p><code>String</code> Parent name of this material</p>
+</dd></dl>
+</li></ul>
+</li><li>
+<p><strong>Raises</strong> :</p>
+<ul><li><dl class="rdoc-list note-list"><dt><code>ArgumentError</code>
+<dd>
+<p>if value is nil or negative</p>
+</dd></dl>
+</li></ul>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="material_parent-3D-source">
+            <pre><span class="ruby-comment"># File markup_material.rb, line 23</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">material_parent=</span>(<span class="ruby-identifier">value</span>)
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>,<span class="ruby-node">&quot;Material Parent - Expecting an alphanumeric value: #{value.inspect}&quot;</span> <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>))
+        
+        <span class="ruby-ivar">@material_parent</span> = <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- material_parent-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- material_parent-3D-method -->
+
+    
       <div id="method-i-to_s" class="method-detail ">
         
         <div class="method-heading">
@@ -206,7 +311,7 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File markup_material.rb, line 24</span>
+            <pre><span class="ruby-comment"># File markup_material.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
         <span class="ruby-ivar">@material_name</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@markup</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;%&quot;</span> <span class="ruby-operator">+</span> (<span class="ruby-operator">!</span><span class="ruby-ivar">@material_parent</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span>  (<span class="ruby-string">&quot;, Parent: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">material_parent</span>) <span class="ruby-operator">:</span> <span class="ruby-string">&quot;&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -268,7 +373,7 @@
 
           
           <div class="method-source-code" id="initialize-source">
-            <pre><span class="ruby-comment"># File markup_material.rb, line 13</span>
+            <pre><span class="ruby-comment"># File markup_material.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">markup</span>, <span class="ruby-identifier">material_name</span>, <span class="ruby-identifier">material_parent</span> = <span class="ruby-keyword">nil</span>) <span class="ruby-comment">#:notnew:</span>
         <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>,<span class="ruby-node">&quot;Markup - Expecting a number from 0-100, you entered: #{markup.inspect}&quot;</span> <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">markup</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Numeric</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">markup</span> <span class="ruby-operator">&gt;=</span><span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">markup</span> <span class="ruby-operator">&lt;=</span><span class="ruby-value">100</span>)
         <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>,<span class="ruby-node">&quot;Material Name - Expecting an alphanumeric value: #{material_name.inspect}&quot;</span> <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">material_name</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>))
